@@ -1,0 +1,59 @@
+// .content{
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-around;
+//     align-items: center;
+//     width: 350px;
+//     height: 85px;
+//     position: absolute;
+//     bottom: 0;
+//     left: 9%;
+//     right: 0;
+//     margin-bottom: 10%;
+// }
+// button{
+//     width: 65px;
+//     height: 50px;
+//     background: transparent;
+//     border: none;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     font-size: 15px;
+//     font-weight: 600;
+//     color: #000;
+//     transition: 0.3s;
+// }
+.navigation-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    // background-color: #ede8eb;
+    padding: 15px 20px;
+    border-radius: 15px;
+    width: 350px;
+    height: 85px;
+    position: absolute;
+    bottom: 0;
+    left: 9%;
+    right: 0;
+    margin-bottom: 10%;
+  }
+  .tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    background-color: #ede8eb;
+    padding: 15px;
+    border-radius: 25%;
+    cursor: pointer;
+    text-decoration: none;
+    // transition: all 0.3s;
+  }
+  .tab:hover {
+    background-color: #80616D;
+  }
+  

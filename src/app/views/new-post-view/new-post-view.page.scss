@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: #FFFFFF;
+    font-family: "Inter", sans-serif;
+}
+.MaxA{
+    margin-top: 10%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10%;
+}
+.title{
+    color: #80616D;
+    font-size: 24px;
+    font-weight: bold;
+}
+img{
+    width: 30px;
+    height: 30px;
+
+}
+.icono-content{
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90%;
+}
+.btn-icono{
+    background: white;
+}
+.MaxB{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20%;
+    // background: #80616D;
+}
+.input{
+    width: 90%;
+    height: 250px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    display: flex;
+    justify-content: flex-end;
+}
+.contador{
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 14px;
+    color: #AA959D;
+}
+.MaxC{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tack{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding-bottom: 5px;
+    width: 90%;
+    gap: 20px;
+    border-bottom: 0.5px solid #AA959D;
+}
+.select{
+    font-size: 16px;
+    color: #AA959D;
+}
+p{
+    font-size: 12px;
+    color: #AA959D;
+}
+
+.img{
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.image{
+    width: 75px;
+    height: 70px;
+}
+
+.post{
+    width: 100%;
+    color: #4D2959;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+.btn.post{
+    font-size: 36px;
+    background: transparent;
+}
+.text-post{
+    font-size: 36px;
+    font-weight: bold;
+    color: #4D2959;
+}
+// input[type="file"] {
+//     display: none;
+// }
+//   button svg {
+//     width: 1.25rem;
+//     height: 1.25rem;
+//   }
+.as{
+    background: #80616D;
+    width: 75px;
+    height: 70px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+}

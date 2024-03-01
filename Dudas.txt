@@ -1,0 +1,16 @@
+- Como poner iconos
+        <img src="../../../assets/icon.jpg">
+- No me renderizan las imagenes 
+- Si un componente tiene una funcionalidad, la mejor practica
+- Si la organizacion esta bien?
+- Creacion de componente
+
+Task
+- View: 
+    - Feed View
+    - Notification View
+    - Notification View (empty)
+    - New Post View
+    - User Profile View
+    - Componentes
+    - NavBar

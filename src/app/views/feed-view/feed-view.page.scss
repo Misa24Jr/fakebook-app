@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: #FFFFFF;
+    font-family: "Inter", sans-serif;
+}
+.MaxA{
+    margin-top: 10%;
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+    // align-items: center;
+    gap: 10px;
+    margin-bottom: 5%;
+    // background: green;
+}
+.MaxB{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 70px;
+    // background: red;
+}
+.title{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient(to right, rgb(236, 234, 234),#806f87);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.content{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.btn-content{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    font-size: 20px;
+    padding-top: 10px;
+    margin-bottom: 5px;
+}
+.title-content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8%;
+}
+.descrip-content{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.img-content{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+h3{
+    color: #4D2959;
+    font-size: 24px;
+    font-weight: bold;
+}
+.like-content{
+    margin-top: 3%;
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 5%;
+    border-bottom: 0.5px solid #4D2959;
+    padding-bottom: 5%;
+}
+button{
+    background: transparent;
+    color: black;
+    font-size: 16px;
+}
+p{
+    color: black;
+}
+.image{
+    width: 25px;
+    height: 25px;
+}
+img{
+    width: 80px;
+    height: 70px;
+}
+.icono-content{
+    // position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    // align-items: ;
+    width: 10%;
+    // background-color: red;
+}
+.icono-contentt{
+    // position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    // align-items: center;
+    width: 10%;
+    // background: blue;
+}
+.icono-search{
+    width: 50px;
+    height: 50px;
+}
+.comments{
+    width: 90%;
+    display: flex;
+}
+.text-comments{
+    color: #4D2959;
+    font-size: 11px;
+    font-weight: bold;
+}
+
