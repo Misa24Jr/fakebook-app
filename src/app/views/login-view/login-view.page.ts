@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router, RouterLink } from '@angular/router';
+import { AppStorageService } from 'src/services/app-storage.service';
 //import { Storage } from '@ionic/storage';
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginPage implements OnInit {
   emailInputValue: String;
   passwordInputValue: String;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private appStorageService: AppStorageService) {
     this.emailInputValue = '';
     this.passwordInputValue = '';
   }
@@ -58,7 +59,7 @@ export class LoginPage implements OnInit {
       }
 
       const data = await response.json();
-      //await this.storage.set('token', data.token);
+      await this.appStorageService.set('token', data.token);
       this.router.navigate(['/feed']);
     } catch (error) {
       //alertar al usuario que hubo un error al intentar iniciar sesión
