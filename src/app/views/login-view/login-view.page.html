@@ -12,24 +12,24 @@
       <h3>Sign in</h3>
     </div>
     <div class="contentMin">
-      
+
       <form action="" class="formularioLogin">
         <div class="email">
-          <input type="text" required>
+          <input type="text" (change)="handleEmailInputChange($event)" required>
           <label>Email</label>
         </div>
 
         <div class="email">
-          <input type="text" required>
+          <input type="password" (change)="handlePasswordInputChange($event)" required>
           <label>Password</label>
         </div>
       </form>
-          
+
           <div class="conetntBtn">
-            <button [routerLink]="['/feed']">Log In</button>
+            <button (click)="handleLoginClick()">Log In</button>
             <a [routerLink]="['/register']">Don't have an acount yet?</a>
           </div>
-        
+
       </div>
   </div>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

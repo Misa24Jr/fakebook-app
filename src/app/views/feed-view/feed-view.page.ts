@@ -17,7 +17,7 @@ import axios from 'axios';
   imports: [IonicModule, CommonModule, FormsModule, RouterLink, NavBarComponent, ModalComponent]
 })
 export class FeedViewPage implements OnInit {
-  images: string[]; 
+  images: string[];
 
   constructor(private storage: Storage) {
     this.images = [];
@@ -27,18 +27,19 @@ export class FeedViewPage implements OnInit {
     this.getImages();
     this.getData();
   }
+
   getImages(){
     const imgRef = ref(this.storage, 'images');
 
     listAll(imgRef)
     .then(async response => {
-        console.log(response);
+        //console.log(response);
         this.images = [];
         for(let item of response.items){
           const url = await getDownloadURL(item)
           this.images.push(url);
           // console.log(url);
-        } 
+        }
     })
     .catch(error => console.log(error));
   }
@@ -47,9 +48,9 @@ export class FeedViewPage implements OnInit {
     try{
       const url = 'https://jsonplaceholder.typicode.com/posts'
       const response = await axios.get(url);
-      console.log(response.data);
+      //console.log(response.data);
     }catch(error){
-      console.log(error);
+      //console.log(error);
     }
   }
 

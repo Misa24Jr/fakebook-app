@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+//import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login-view.page.html',
@@ -11,10 +13,55 @@ import { RouterLink } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule, RouterLink]
 })
 export class LoginPage implements OnInit {
+  emailInputValue: String;
+  passwordInputValue: String;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private router: Router) {
+    this.emailInputValue = '';
+    this.passwordInputValue = '';
   }
 
+  //aplicar validación de inputs
+  ngOnInit() {
+
+  }
+
+  handleEmailInputChange(event: any) {
+    this.emailInputValue = event.target.value;
+  }
+
+  handlePasswordInputChange(event: any) {
+    this.passwordInputValue = event.target.value;
+  }
+
+  async handleLoginClick() {
+    if(this.emailInputValue === '' || this.passwordInputValue === '') {
+      return; //alertar al usuario que todos los campos son requeridos
+    }
+
+    try {
+      const response = await fetch('https://fakebook-api-dev-qamc.3.us-1.fl0.io/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: this.emailInputValue,
+          password: this.passwordInputValue
+        })
+      });
+
+      if(response.status === 401) {
+        return; //alertar al usuario que su correo o contraseña son incorrectos
+      }
+
+      if(response.status !== 401 && response.status !== 200) {
+        return; //alertar al usuario que hubo un error desconocido en el servidor
+      }
+
+      const data = await response.json();
+      //await this.storage.set('token', data.token);
+      this.router.navigate(['/feed']);
+    } catch (error) {
+      //alertar al usuario que hubo un error al intentar iniciar sesión
+    }
+  }
 }
