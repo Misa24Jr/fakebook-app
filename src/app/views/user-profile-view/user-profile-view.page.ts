@@ -25,6 +25,7 @@ export class UserProfileViewPage implements OnInit {
 
   ngOnInit() {
     this.getImages();
+    this.getAllPosts();
   }
 
   async getAllPosts() {

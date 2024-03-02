@@ -29,11 +29,12 @@ export class FeedViewPage implements OnInit {
   ngOnInit() {
     this.getImages();
     this.getData();
+    this.getFriendPosts();
   }
 
   async getFriendPosts() {
     try {
-      const response = await fetch('', {
+      const response = await fetch('https://fakebook-api-dev-qamc.3.us-1.fl0.io/api/posts/getByFriends', {
         method: 'GET',
         headers: { 'Authorization': `Bearer ${this.token}` }
       });
