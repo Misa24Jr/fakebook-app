@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { alert } from 'src/app/utils/alert';
 
 @Component({
   selector: 'app-delete-account-view',
@@ -12,10 +13,30 @@ import { RouterLink } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule, RouterLink]
 })
 export class DeleteAccountViewPage implements OnInit {
+  token: string;
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.token = ''; //get token from storage
+  }
 
   ngOnInit() {
+
+  }
+
+  async handleConfirmClick() {
+    try {
+      const response = await fetch('https://fakebook-api-dev-qamc.3.us-1.fl0.io/api/users/delete', {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${this.token}` }
+      });
+
+      if(response.status !== 200) return alert('Error!', 'Server error while trying to delete your account', ['OK']);
+
+      alert('Good bye!', 'Your account has been deleted successfully', ['OK']);
+      this.router.navigate(['/']);
+    } catch (error) {
+      return alert('Error!', 'Something went wrong while trying to delete your account', ['OK']);
+    }
   }
 
 }

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavBarComponent } from 'src/app/components/others/nav-bar/nav-bar.component';
 import { PhotosService } from 'src/services/photos.service';
+import { Router } from '@angular/router';
+import { alert } from 'src/app/utils/alert';
 
 @Component({
   selector: 'app-notifications-view',
@@ -14,13 +16,60 @@ import { PhotosService } from 'src/services/photos.service';
 })
 export class NotificationsViewPage implements OnInit {
 
+  token: string; // get the token from the local storage
   photos: string[] = [];
 
-  constructor(private photosService: PhotosService) {
+  constructor(private photosService: PhotosService, private router: Router) {
     this.photos = this.photosService.photos;
+    this.token = '';
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.getFriendRequests();
+
+  }
+
+  async getFriendRequests() {
+    try {
+      const response = await fetch('https://fakebook-api-dev-qamc.3.us-1.fl0.io/api/friends/getRequests', {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${this.token}` }
+      });
+
+      if(response.status !== 200) {
+        //render the page with no notifications
+        return alert('Error!', 'Server error getting your friend requests', ['OK']);
+      }
+
+      const data = await response.json();
+      return console.log(data);
+    } catch (error) {
+      alert('Error!', 'Unable to get your friend requests', ['OK']);
+      return this.router.navigate(['/feed']);
+    }
+  }
+
+  async handleAcceptDeclineClick(answer: boolean) {
+    try {
+      const applicantId = ''; // get the applicant id from the notification
+      const response = await fetch('https://fakebook-api-dev-qamc.3.us-1.fl0.io/api/friends/answerRequest', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.token}`,
+        },
+        body: JSON.stringify({
+          applicant: applicantId,
+          answer: answer
+        })
+      });
+
+      if(response.status !== 200) return alert('Error!', 'Server error trying to accept/decline the friend request', ['OK']);
+
+      return; //refresh the notifications deleting the accepted/declined request
+    } catch (error) {
+      return alert('Error!', 'Unknown trying to accept/decline the friend request', ['OK']);
+    }
   }
 
   async takePhoto(){

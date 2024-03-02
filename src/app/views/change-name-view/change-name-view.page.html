@@ -21,13 +21,13 @@
       <div>
         <p class="subTitle">Change your name</p>
       </div>
-      
+
       <div>
-        <input type="text" placeholder="  Your new name here" class="txt">
+        <input (change)="handleNameChange($event)" type="text" placeholder="  Your new name here" class="txt">
       </div>
-      
+
       <div>
-        <button class="btn">Confirm</button>
+        <button (click)="handleConfirmClick()" class="btn">Confirm</button>
       </div>
     </div>
 

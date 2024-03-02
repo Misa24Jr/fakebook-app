@@ -7,31 +7,25 @@
 </head>
 <body>
   <div>
-
     <div class="MaxA">
       <div class="icono-content">
         <button [routerLink]="['/user-settings']" class="btn-icono">
           <img src="../../../assets/chevron-back-outline.svg">
-      </button>
+        </button>
       </div>
       <h3 class="title">Fakebook</h3>
     </div>
-
-
     <div class="MaxB">
       <div>
         <p class="subTitle">Change your email</p>
       </div>
-      
       <div>
-        <input type="text" placeholder="  Your new email here" class="txt">
+        <input (change)="handleEmailChange($event)" type="text" placeholder="  Your new email here" class="txt">
       </div>
-      
       <div>
-        <button class="btn">Confirm</button>
+        <button (click)="handleConfirmClick()" class="btn">Confirm</button>
       </div>
     </div>
-
   </div>
 </body>
 </html>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { alert } from 'src/app/utils/alert';
 import { RouterLink, Router } from '@angular/router';
 
 @Component({
@@ -40,7 +41,7 @@ export class RegisterViewPage implements OnInit {
 
   async handleRegisterClick() {
     if(this.nameInputValue === '' || this.emailInputValue === '' || this.passwordInputValue === '') {
-      return; //alertar al usuario que todos los campos son requeridos
+      return alert('Oops!', 'Name, email and password are required', ['Try Again']);
     }
 
     try {
@@ -54,11 +55,12 @@ export class RegisterViewPage implements OnInit {
         })
       });
 
-      if(response.status !== 201) return //alertar al usuario que hubo un error en el server al intentar registrarse
+      if(response.status !== 201) return alert('Error!', 'Unknown error in server', ['OK']);
 
+      alert('Success!', 'You have been registered successfully', ['Continue']);
       this.router.navigate(['/login']);
     } catch (error) {
-      //alertar al usuario que hubo un error al intentar registrarse
+      return alert('Error!', 'Something went wrong while trying to register', ['OK']);
     }
   }
 

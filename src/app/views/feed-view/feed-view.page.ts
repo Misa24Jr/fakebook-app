@@ -7,6 +7,7 @@ import { NavBarComponent } from 'src/app/components/others/nav-bar/nav-bar.compo
 import { ModalComponent } from 'src/app/components/others/modal/modal.component';
 import { Storage, ref } from '@angular/fire/storage';
 import { listAll, getDownloadURL } from '@firebase/storage';
+import { alert } from 'src/app/utils/alert';
 import axios from 'axios';
 
 @Component({
@@ -18,14 +19,32 @@ import axios from 'axios';
 })
 export class FeedViewPage implements OnInit {
   images: string[];
+  token: string;
 
   constructor(private storage: Storage) {
     this.images = [];
+    this.token = '';
   }
 
   ngOnInit() {
     this.getImages();
     this.getData();
+  }
+
+  async getFriendPosts() {
+    try {
+      const response = await fetch('', {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${this.token}` }
+      });
+
+      if(response.status !== 200) return alert('Error!', 'Server error getting your friend posts', ['OK']);
+
+      const data = await response.json();
+      return console.log(data);
+    } catch (error) {
+      return alert('Error!', 'Unable to get your friend posts', ['OK']);
+    }
   }
 
   getImages(){

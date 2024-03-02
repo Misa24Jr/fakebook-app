@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, AlertController } from '@ionic/angular';
 import { Router, RouterLink } from '@angular/router';
+import { alert } from 'src/app/utils/alert';
 import { AppStorageService } from 'src/services/app-storage.service';
-//import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   emailInputValue: String;
   passwordInputValue: String;
 
-  constructor(private router: Router, private appStorageService: AppStorageService) {
+  constructor(private router: Router, private appStorageService: AppStorageService, public alertCtrl: AlertController) {
     this.emailInputValue = '';
     this.passwordInputValue = '';
   }
@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
 
   async handleLoginClick() {
     if(this.emailInputValue === '' || this.passwordInputValue === '') {
-      return; //alertar al usuario que todos los campos son requeridos
+      return alert('Oops!', 'Email and password are required', ['Try Again']);
     }
 
     try {
@@ -50,19 +50,15 @@ export class LoginPage implements OnInit {
         })
       });
 
-      if(response.status === 401) {
-        return; //alertar al usuario que su correo o contraseña son incorrectos
-      }
+      if(response.status === 401) return alert('Oops!', 'Email or password is incorrect', ['Try Again']);
 
-      if(response.status !== 401 && response.status !== 200) {
-        return; //alertar al usuario que hubo un error desconocido en el servidor
-      }
+      if(response.status !== 401 && response.status !== 200) return alert('Error!', 'Unknown error in server', ['OK']);
 
       const data = await response.json();
       await this.appStorageService.set('token', data.token);
       this.router.navigate(['/feed']);
     } catch (error) {
-      //alertar al usuario que hubo un error al intentar iniciar sesión
+      return alert('Error!', 'Something went wrong while trying to login', ['OK']);
     }
   }
 }
