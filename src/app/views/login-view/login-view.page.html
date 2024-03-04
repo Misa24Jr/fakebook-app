@@ -14,10 +14,20 @@
     <div class="contentMin">
       <form action="" class="formularioLogin">
         <div class="email">
+
+          <article>
+            <img class="icon" src="../../../assets/mail-outline.svg">
+          </article>
+          
           <input type="text" (change)="handleEmailInputChange($event)" required>
           <label>Email</label>
         </div>
         <div class="email">
+
+          <article>
+            <img class="icon" src="../../../assets/lock-closed-outline.svg">
+          </article>
+
           <input type="password" (change)="handlePasswordInputChange($event)" required>
           <label>Password</label>
         </div>

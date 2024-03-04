@@ -1,10 +1,10 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { RouteReuseStrategy, provideRouter } from '@angular/router';
+import { RouteReuseStrategy, provideRouter, withViewTransitions } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 import { IonicModule } from '@ionic/angular';
 
-import { routes } from './app/app.routes';
+import { routes } from './app/router/app.routes';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -26,8 +26,8 @@ bootstrapApplication(AppComponent, {
       name: 'appdb',
       driverOrder: [Drivers.IndexedDB]
     })),
-    provideRouter(routes),
-
+    provideRouter(routes,
+      withViewTransitions())
   ],
 });
 //,"locationId":"us-central"

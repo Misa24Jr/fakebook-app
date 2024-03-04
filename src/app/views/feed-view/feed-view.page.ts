@@ -5,29 +5,32 @@ import { IonicModule } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
 import { NavBarComponent } from 'src/app/components/others/nav-bar/nav-bar.component';
 import { ModalComponent } from 'src/app/components/others/modal/modal.component';
-import { Storage, ref } from '@angular/fire/storage';
-import { listAll, getDownloadURL } from '@firebase/storage';
 import { alert } from 'src/app/utils/alert';
 import axios from 'axios';
+import { PostComponent } from 'src/app/components/containers/post/post.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 
 @Component({
   selector: 'app-feed-view',
   templateUrl: './feed-view.page.html',
   styleUrls: ['./feed-view.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLink, NavBarComponent, ModalComponent]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink, NavBarComponent, ModalComponent, PostComponent, ScrollingModule]
 })
 export class FeedViewPage implements OnInit {
-  images: string[];
   token: string;
 
-  constructor(private storage: Storage) {
-    this.images = [];
+  description:string = 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ';
+  name: string = 'Isabella Fonseca';
+  date: string = '27/08/2024';
+
+  constructor() {
     this.token = '';
   }
 
   ngOnInit() {
-    this.getImages();
+    // this.getImages();
     this.getData();
     this.getFriendPosts();
   }
@@ -48,29 +51,13 @@ export class FeedViewPage implements OnInit {
     }
   }
 
-  getImages(){
-    const imgRef = ref(this.storage, 'images');
-
-    listAll(imgRef)
-    .then(async response => {
-        //console.log(response);
-        this.images = [];
-        for(let item of response.items){
-          const url = await getDownloadURL(item)
-          this.images.push(url);
-          // console.log(url);
-        }
-    })
-    .catch(error => console.log(error));
-  }
-
   getData = async () =>{
     try{
       const url = 'https://jsonplaceholder.typicode.com/posts'
       const response = await axios.get(url);
       //console.log(response.data);
     }catch(error){
-      //console.log(error);
+      console.log(error);
     }
   }
 
