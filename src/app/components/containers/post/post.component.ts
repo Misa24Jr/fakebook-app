@@ -14,7 +14,7 @@ export class PostComponent  implements OnInit {
    images: string[];
    likeClicked: boolean;
    favoeiteClicked: boolean;
-   @Input() description:string = '';
+    @Input() description:string = '';
     @Input() name: string = '';
     @Input() date: string = '';
 

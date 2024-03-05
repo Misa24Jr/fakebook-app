@@ -4,16 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterLink, Router } from '@angular/router';
 import { alert } from 'src/app/utils/alert';
+import { FriendsComponent } from 'src/app/components/containers/friends/friends.component';
 
 @Component({
   selector: 'app-search-view',
   templateUrl: './search-view.page.html',
   styleUrls: ['./search-view.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink, FriendsComponent]
 })
 export class SearchViewPage implements OnInit {
   token: string;
+  name: string = 'Luis Romero';
 
   constructor(private router: Router) {
     this.token = ''; // get token from local storage
