@@ -4,7 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterLink, Router } from '@angular/router';
 import { alert } from 'src/app/utils/alert';
+<<<<<<< HEAD
 import { FriendsComponent } from 'src/app/components/containers/friends/friends.component';
+=======
+import { GetResult, Preferences } from '@capacitor/preferences';
+>>>>>>> 2c38aa41830a130ad78c742b8c24e331b3e6a6f3
 
 @Component({
   selector: 'app-search-view',
@@ -14,15 +18,19 @@ import { FriendsComponent } from 'src/app/components/containers/friends/friends.
   imports: [IonicModule, CommonModule, FormsModule, RouterLink, FriendsComponent]
 })
 export class SearchViewPage implements OnInit {
+<<<<<<< HEAD
   token: string;
   name: string = 'Luis Romero';
+=======
+  token: GetResult;
+>>>>>>> 2c38aa41830a130ad78c742b8c24e331b3e6a6f3
 
   constructor(private router: Router) {
-    this.token = ''; // get token from local storage
+    this.token = { value: '' };
   }
 
-  ngOnInit() {
-
+  async ngOnInit() {
+    this.token = await Preferences.get({ key : 'token' });
   }
 
   async handleSearchInputChange(event: any) {
@@ -31,7 +39,7 @@ export class SearchViewPage implements OnInit {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`
+          'Authorization': `Bearer ${this.token.value}`
         },
         body: JSON.stringify({ name: event.target.value })
       });

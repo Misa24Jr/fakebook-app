@@ -6,8 +6,9 @@ import { RouterLink } from '@angular/router';
 import { NavBarComponent } from 'src/app/components/others/nav-bar/nav-bar.component';
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
+import { alert } from 'src/app/utils/alert';
 import { personCircleOutline, chevronForwardOutline, chevronBack } from 'ionicons/icons';
-import { AppStorageService } from 'src/services/app-storage.service';
+import { GetResult, Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-user-settings-view',
@@ -18,15 +19,39 @@ import { AppStorageService } from 'src/services/app-storage.service';
 })
 export class UserSettingsViewPage implements OnInit {
 
-  constructor(private appStorageService: AppStorageService) {
+  token: GetResult;
+  userName: string;
+  userEmail: string;
+
+  constructor() {
     addIcons({ personCircleOutline });
     addIcons({ chevronForwardOutline });
     addIcons({ chevronBack });
+    this.token = { value: '' };
+    this.userName = "";
+    this.userEmail = "";
   }
 
   async ngOnInit() {
-    const token = this.appStorageService.get('token');
-    console.log(token);
+    this.token = await Preferences.get({ key : 'token' });
+    this.getNameAndEmail();
+  }
+
+  async getNameAndEmail() {
+    try {
+      const response = await fetch('https://fakebook-api-dev-qamc.3.us-1.fl0.io/api/users/getNameAndEmail', {
+        method: 'GET',
+        headers: { "Authorization": `Bearer ${this.token.value}` }
+      });
+
+      if(response.status !== 200) return alert("Oops", "Something went wrong trying to get user email and name", ["OK"]);
+
+      const data = await response.json();
+      this.userName = data.name;
+      this.userEmail = data.email;
+    } catch (error) {
+      return alert("Oops", "Something went wrong trying to get user email and name", ["OK"]);
+    }
   }
 
 }

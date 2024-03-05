@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, AlertController } from '@ionic/angular';
 import { Router, RouterLink } from '@angular/router';
 import { alert } from 'src/app/utils/alert';
-import { AppStorageService } from 'src/services/app-storage.service';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   emailInputValue: String;
   passwordInputValue: String;
 
-  constructor(private router: Router, private appStorageService: AppStorageService, public alertCtrl: AlertController) {
+  constructor(private router: Router, public alertCtrl: AlertController) {
     this.emailInputValue = '';
     this.passwordInputValue = '';
   }
@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
       if(response.status !== 401 && response.status !== 200) return alert('Error!', 'Unknown error in server', ['OK']);
 
       const data = await response.json();
-      await this.appStorageService.set('token', data.token);
+      await Preferences.set({ key: 'token', value: data.token });
       this.router.navigate(['/feed']);
     } catch (error) {
       return alert('Error!', 'Something went wrong while trying to login', ['OK']);
