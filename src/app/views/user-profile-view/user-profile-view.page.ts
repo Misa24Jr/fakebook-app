@@ -18,14 +18,17 @@ import { GetResult, Preferences } from '@capacitor/preferences';
 export class UserProfileViewPage implements OnInit {
   images: string[];
   token: GetResult;
+  userName: string;
 
   constructor(private storage: Storage) {
     this.images = [];
     this.token = { value: '' };
+    this.userName = "";
   }
 
   async ngOnInit() {
     this.token = await Preferences.get({ key : 'token' });
+    this.getNameAndEmail();
     this.getImages();
     this.getAllPosts();
   }
@@ -67,4 +70,21 @@ export class UserProfileViewPage implements OnInit {
     })
     .catch(error => console.log(error));
   }
+
+  async getNameAndEmail() {
+    try {
+      const response = await fetch('https://fakebook-api-dev-qamc.3.us-1.fl0.io/api/users/getNameAndEmail', {
+        method: 'GET',
+        headers: { "Authorization": `Bearer ${this.token.value}` }
+      });
+
+      if(response.status !== 200) return alert("Oops", "Something went wrong trying to get user email and name", ["OK"]);
+
+      const data = await response.json();
+      this.userName = data.name;
+    } catch (error) {
+      return alert("Oops", "Something went wrong trying to get user email and name", ["OK"]);
+    }
+  }
+
 }
