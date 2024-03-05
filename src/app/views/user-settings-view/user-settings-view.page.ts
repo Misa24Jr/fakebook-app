@@ -7,7 +7,6 @@ import { NavBarComponent } from 'src/app/components/others/nav-bar/nav-bar.compo
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personCircleOutline, chevronForwardOutline, chevronBack } from 'ionicons/icons';
-import { AppStorageService } from 'src/services/app-storage.service';
 
 @Component({
   selector: 'app-user-settings-view',
@@ -18,15 +17,14 @@ import { AppStorageService } from 'src/services/app-storage.service';
 })
 export class UserSettingsViewPage implements OnInit {
 
-  constructor(private appStorageService: AppStorageService) {
+  constructor() {
     addIcons({ personCircleOutline });
     addIcons({ chevronForwardOutline });
     addIcons({ chevronBack });
   }
 
   async ngOnInit() {
-    const token = this.appStorageService.get('token');
-    console.log(token);
+
   }
 
 }

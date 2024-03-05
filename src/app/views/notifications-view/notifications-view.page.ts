@@ -6,6 +6,7 @@ import { NavBarComponent } from 'src/app/components/others/nav-bar/nav-bar.compo
 import { PhotosService } from 'src/services/photos.service';
 import { Router } from '@angular/router';
 import { alert } from 'src/app/utils/alert';
+import { GetResult, Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-notifications-view',
@@ -16,24 +17,24 @@ import { alert } from 'src/app/utils/alert';
 })
 export class NotificationsViewPage implements OnInit {
 
-  token: string; // get the token from the local storage
+  token: GetResult ;
   photos: string[] = [];
 
   constructor(private photosService: PhotosService, private router: Router) {
     this.photos = this.photosService.photos;
-    this.token = '';
+    this.token = { value: ''};
   }
 
   async ngOnInit() {
+    this.token = await Preferences.get({ key: 'token' });
     this.getFriendRequests();
-
   }
 
   async getFriendRequests() {
     try {
       const response = await fetch('https://fakebook-api-dev-qamc.3.us-1.fl0.io/api/friends/getRequests', {
         method: 'GET',
-        headers: { 'Authorization': `Bearer ${this.token}` }
+        headers: { 'Authorization': `Bearer ${this.token.value}` }
       });
 
       if(response.status !== 200) {
@@ -42,6 +43,12 @@ export class NotificationsViewPage implements OnInit {
       }
 
       const data = await response.json();
+
+      if(data.length === 0){
+        //render the page with no notifications
+        console.log('No friend requests');
+      }
+
       return console.log(data);
     } catch (error) {
       alert('Error!', 'Unable to get your friend requests', ['OK']);
@@ -56,7 +63,7 @@ export class NotificationsViewPage implements OnInit {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`,
+          'Authorization': `Bearer ${this.token.value}`,
         },
         body: JSON.stringify({
           applicant: applicantId,

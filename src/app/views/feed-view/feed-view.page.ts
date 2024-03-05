@@ -6,10 +6,9 @@ import { RouterLink } from '@angular/router';
 import { NavBarComponent } from 'src/app/components/others/nav-bar/nav-bar.component';
 import { ModalComponent } from 'src/app/components/others/modal/modal.component';
 import { alert } from 'src/app/utils/alert';
-import axios from 'axios';
 import { PostComponent } from 'src/app/components/containers/post/post.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-
+import { GetResult, Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-feed-view',
@@ -19,19 +18,17 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   imports: [IonicModule, CommonModule, FormsModule, RouterLink, NavBarComponent, ModalComponent, PostComponent, ScrollingModule]
 })
 export class FeedViewPage implements OnInit {
-  token: string;
-
+  token: GetResult ;
   description:string = 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ';
   name: string = 'Isabella Fonseca';
   date: string = '27/08/2024';
 
   constructor() {
-    this.token = '';
+    this.token = { value: '' };
   }
 
-  ngOnInit() {
-    // this.getImages();
-    this.getData();
+  async ngOnInit() {
+    this.token = await Preferences.get({ key: 'token' });
     this.getFriendPosts();
   }
 
@@ -39,26 +36,21 @@ export class FeedViewPage implements OnInit {
     try {
       const response = await fetch('https://fakebook-api-dev-qamc.3.us-1.fl0.io/api/posts/getByFriends', {
         method: 'GET',
-        headers: { 'Authorization': `Bearer ${this.token}` }
+        headers: { 'Authorization': `Bearer ${this.token.value}` }
       });
 
       if(response.status !== 200) return alert('Error!', 'Server error getting your friend posts', ['OK']);
 
       const data = await response.json();
-      return console.log(data);
+
+      if(data.length === 0){
+        //render a message like "It seems like your friends haven't posted anything yet."
+        console.log('No posts');
+      }
+
+      return console.log(data.posts);
     } catch (error) {
       return alert('Error!', 'Unable to get your friend posts', ['OK']);
     }
   }
-
-  getData = async () =>{
-    try{
-      const url = 'https://jsonplaceholder.typicode.com/posts'
-      const response = await axios.get(url);
-      //console.log(response.data);
-    }catch(error){
-      console.log(error);
-    }
-  }
-
 }

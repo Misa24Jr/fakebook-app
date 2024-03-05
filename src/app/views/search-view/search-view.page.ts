@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterLink, Router } from '@angular/router';
 import { alert } from 'src/app/utils/alert';
+import { GetResult, Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-search-view',
@@ -13,14 +14,14 @@ import { alert } from 'src/app/utils/alert';
   imports: [IonicModule, CommonModule, FormsModule, RouterLink]
 })
 export class SearchViewPage implements OnInit {
-  token: string;
+  token: GetResult;
 
   constructor(private router: Router) {
-    this.token = ''; // get token from local storage
+    this.token = { value: '' };
   }
 
-  ngOnInit() {
-
+  async ngOnInit() {
+    this.token = await Preferences.get({ key : 'token' });
   }
 
   async handleSearchInputChange(event: any) {
@@ -29,7 +30,7 @@ export class SearchViewPage implements OnInit {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`
+          'Authorization': `Bearer ${this.token.value}`
         },
         body: JSON.stringify({ name: event.target.value })
       });

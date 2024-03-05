@@ -6,6 +6,7 @@ import { RouterLink, Router } from '@angular/router';
 import { Storage, ref } from '@angular/fire/storage';
 import { listAll, getDownloadURL } from '@firebase/storage';
 import { alert } from 'src/app/utils/alert';
+import { GetResult, Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-user-profile-view',
@@ -16,14 +17,15 @@ import { alert } from 'src/app/utils/alert';
 })
 export class UserProfileViewPage implements OnInit {
   images: string[];
-  token: string;
+  token: GetResult;
 
   constructor(private storage: Storage) {
     this.images = [];
-    this.token = '';
+    this.token = { value: '' };
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.token = await Preferences.get({ key : 'token' });
     this.getImages();
     this.getAllPosts();
   }
@@ -32,13 +34,19 @@ export class UserProfileViewPage implements OnInit {
     try {
       const response = await fetch('https://fakebook-api-dev-qamc.3.us-1.fl0.io/api/posts/getAll', {
         method: 'GET',
-        headers: { 'Authorization': `Bearer ${this.token}` }
+        headers: { 'Authorization': `Bearer ${this.token.value}` }
       });
 
       if(response.status !== 200) return alert('Error!', 'Server error getting your posts', ['OK']);
 
       const data = await response.json();
-      return console.log(data);
+
+      if(data.length === 0){
+        //render a message like "It seems like you haven't posted anything yet."
+        console.log('No posts');
+      }
+
+      return console.log("user posts: ", data.posts);
     } catch (error) {
       return alert('Error!', 'Unable to get your posts', ['OK']);
     }

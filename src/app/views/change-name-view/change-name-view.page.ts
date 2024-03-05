@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterLink, Router } from '@angular/router';
 import { alert } from 'src/app/utils/alert';
+import { GetResult, Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-change-name-view',
@@ -14,15 +15,15 @@ import { alert } from 'src/app/utils/alert';
 })
 export class ChangeNameViewPage implements OnInit {
   nameInputValue: String;
-  token: string;
+  token: GetResult;
 
   constructor(private router: Router) {
     this.nameInputValue = '';
-    this.token = ''; //get token from storage
+    this.token = { value: '' };
    }
 
-  ngOnInit() {
-
+  async ngOnInit() {
+    this.token = await Preferences.get({ key : 'token' });
   }
 
   handleNameChange(event: any) {
@@ -37,9 +38,9 @@ export class ChangeNameViewPage implements OnInit {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`
+          'Authorization': `Bearer ${this.token.value}`
         },
-        body: JSON.stringify({ name: this.nameInputValue })
+        body: JSON.stringify({ newName: this.nameInputValue })
       });
 
       if(response.status !== 200) return alert('Error!', 'Unknown error in server', ['OK']);
