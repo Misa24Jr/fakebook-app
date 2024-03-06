@@ -1,0 +1,27 @@
+<div class="content">
+  <div class="descrip-content">
+    <div class="day-name">
+        <span class="name">{{name}}</span>
+        <span class="date">{{date}}</span>
+    </div>
+    <p>{{description}}</p>
+  </div>
+  <div class="img-content">
+    <img [src]="image" *ngFor="let image of images" class="img">
+  </div>
+  <div class="like-content">
+    <div class="comments">
+      <button>
+        <p class="text-comments">explore comments</p>
+      </button>
+    </div>
+
+    <button class="btn-like" [ngStyle]="{'background-color': likeClicked ? '#4D2959' : 'transparent'}" (click)="onLikeClick()">
+      <img class="image" src="../../../assets/thumbs-up-outline.svg">
+    </button>
+
+    <button class="btn-fav" [ngStyle]="{'background-color': favoeiteClicked ? '#6d5d73' : 'transparent'}" (click)="onFavoriteClick()">
+      <img class="image" src="../../../assets/bookmark-outline.svg">
+    </button>
+  </div>
+</div>
