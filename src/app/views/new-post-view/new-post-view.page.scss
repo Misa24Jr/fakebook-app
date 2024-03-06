@@ -43,20 +43,7 @@ img{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20%;
-}
-.input{
-    width: 90%;
-    height: 250px;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: none;
-    // display: flex;
-    // justify-content: flex-end;
-    background: red;
-    color: black;
+    margin-bottom: 10%;
 }
 .contador{
     width: 90%;
@@ -128,3 +115,49 @@ p{
     width: 75px;
     height: 70px;
 }
+.textarea{
+    background: transparent;
+    color: black;
+    width: 85%;
+    outline: none;
+    border: none;
+}
+.textarea::placeholder{
+    color: #AA959D;
+    font-size: 16px;;
+    // padding-left: 10px;
+    // padding-top: 10px;
+}
+.file-select {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .file-select::before {
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 3px dashed #4D2959;
+    content: '+';
+    color: #4D2959;
+    font-size: 40px;
+    text-align: center;/* testo por defecto */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .file-select input[type="file"] {
+    opacity: 0;
+    width: 75px;
+    height: 70px;
+    display: inline-block;
+  }
+  
+  #src-file1::before {
+    content: 'Seleccionar Archivo 1';
+  }

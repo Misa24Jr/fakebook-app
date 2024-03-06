@@ -16,10 +16,9 @@
       <h3 class="title">Create new post</h3>
     </div>
     <div class="MaxB">
-      <input type="text" class="input" [(ngModel)]="textInput" (input)="countCharacters()" maxlength="400">
-      <!-- placeholder="What’s on your mind?" -->
+      <textarea name="" id="" rows="15" [(ngModel)]="textInput" (input)="countCharacters()" maxlength="400" class="textarea" placeholder="What’s on your mind?"></textarea>
       <div class="contador">
-        <p>Characters: {{characters}}</p>
+        <p>Characters:  {{characters}}/400</p>
       </div>
     </div>
 
@@ -28,19 +27,15 @@
       <div class="tack">
         <p class="select">Select images from your gallery</p>
         <div>
-          <p>5/8</p>
+          <p>{{countImg}}/8</p>
         </div>
         <img src="../../../assets/chevron-down-outline.svg">
       </div>
 
       <div class="img">
-        <img src="../../../assets/img-1.png" class="image">
-        <img src="../../../assets/img-2.png" class="image">
-        <img src="../../../assets/img-3.png" class="image">
-        <img src="../../../assets/img-4.png" class="image">
-        <img src="../../../assets/img-5.png" class="image">
-        <div class="as">
-          <input type="file" (change)="uploadImage($event)">
+        <img [src]="image" *ngFor="let image of images" class="image">
+        <div class="file-select" id="src-fiel">
+          <input type="file" (change)="uploadImage($event)" aria-label="Image" name="src-file2">
         </div>
 
       </div>
