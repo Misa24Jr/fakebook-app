@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { Storage, ref } from '@angular/fire/storage';
 import { listAll, getDownloadURL } from '@firebase/storage';
+import { alert } from 'src/app/utils/alert';
 
 @Component({
   selector: 'app-post',
@@ -14,17 +15,17 @@ export class PostComponent  implements OnInit {
    images: string[];
    likeClicked: boolean;
    favoeiteClicked: boolean;
-    @Input() description:string = '';
+   @Input() description:string = '';
     @Input() name: string = '';
     @Input() date: string = '';
 
-  constructor(private storage: Storage) { 
+  constructor(private storage: Storage) {
     this.images = [];
     this.likeClicked = false;
     this.favoeiteClicked = false;
    }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.getImages();
     // this.getFriendPosts();
    }
@@ -33,9 +34,14 @@ export class PostComponent  implements OnInit {
     this.likeClicked = !this.likeClicked;
     // this.favoeiteClicked = false;
   }
+
   onFavoriteClick() {
     this.favoeiteClicked = !this.favoeiteClicked;
     // this.likeClicked = false;
+  }
+
+  handleExploreCommentsClick() {
+    alert('Explore Comments', 'This feature is not available yet.', ['OK']);
   }
 
   getImages(){

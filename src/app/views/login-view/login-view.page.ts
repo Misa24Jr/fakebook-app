@@ -1,30 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, AlertController } from '@ionic/angular';
+import { IonicModule, AlertController, IonIcon } from '@ionic/angular';
 import { Router, RouterLink } from '@angular/router';
 import { alert } from 'src/app/utils/alert';
 import { Preferences } from '@capacitor/preferences';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login-view.page.html',
   styleUrls: ['./login-view.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink],
 })
 export class LoginPage implements OnInit {
   emailInputValue: String;
   passwordInputValue: String;
+  clearInput: String;
 
   constructor(private router: Router, public alertCtrl: AlertController) {
     this.emailInputValue = '';
     this.passwordInputValue = '';
+    this.clearInput = '';
   }
 
   //aplicar validación de inputs
   ngOnInit() {
 
+  }
+
+  handleClearInput() {
+    console.log('click me')
   }
 
   handleEmailInputChange(event: any) {

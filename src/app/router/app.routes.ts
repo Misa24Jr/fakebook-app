@@ -59,6 +59,9 @@ export const routes: Routes = [
     path: 'new-post',
     loadComponent: () => import('../views/new-post-view/new-post-view.page').then( m => m.NewPostViewPage)
   },
-];
+  {
+    path: 'log-out',
+    loadComponent: () => import('../views/log-out/log-out.page').then( m => m.LogOutPage)
+  },
 
-//meter en carpeta routing
+];

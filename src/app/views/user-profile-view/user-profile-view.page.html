@@ -26,8 +26,8 @@
         </article>
 
           <div class="btn-content">
-            <button><img src="../../../assets/pencil-outline.svg"></button>
-            <button><img src="../../../assets/trash-outline.svg"></button>
+            <button (click)="handlePencilClick()"><img src="../../../assets/pencil-outline.svg"></button>
+            <button (click)="handleTrashClick()"><img src="../../../assets/trash-outline.svg"></button>
           </div>
           <div class="descrip-content">
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio dologggggribus ut ab iure magni corporis facere amet ipsam, adipisci esse, maxime modi laborum animi? Quas alias corrupti eius aut voluptatum!</p>
@@ -39,7 +39,7 @@
           <div class="like-content">
             <div class="comments">
               <button>
-                <p class="text-comments">explore comments</p>
+                <p (click)="handleExploreCommentsClick()" class="text-comments">explore comments</p>
               </button>
             </div>
               <p class="day">last edited 12/12/23 15:30</p>

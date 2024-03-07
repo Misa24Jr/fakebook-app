@@ -87,4 +87,16 @@ export class UserProfileViewPage implements OnInit {
     }
   }
 
+  handlePencilClick() {
+    alert("Edit Post", "This feature is not available yet", ["OK"]);
+  }
+
+  handleTrashClick() {
+    alert("Delete Post", "This feature is not available yet", ["OK"]);
+  }
+
+  handleExploreCommentsClick() {
+    alert("Explore Comments", "This feature is not available yet", ["OK"]);
+  }
+
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavBarComponent } from 'src/app/components/others/nav-bar/nav-bar.component';
-import { PhotosService } from 'src/services/photos.service';
 import { Router } from '@angular/router';
 import { alert } from 'src/app/utils/alert';
 import { GetResult, Preferences } from '@capacitor/preferences';
@@ -20,8 +19,7 @@ export class NotificationsViewPage implements OnInit {
   token: GetResult ;
   photos: string[] = [];
 
-  constructor(private photosService: PhotosService, private router: Router) {
-    this.photos = this.photosService.photos;
+  constructor(private router: Router) {
     this.token = { value: ''};
   }
 
@@ -78,9 +76,4 @@ export class NotificationsViewPage implements OnInit {
       return alert('Error!', 'Unknown trying to accept/decline the friend request', ['OK']);
     }
   }
-
-  async takePhoto(){
-    await this.photosService.addNewPhoto();
-  }
-
 }

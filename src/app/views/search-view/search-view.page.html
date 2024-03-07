@@ -13,14 +13,22 @@
           <img class="imagee" src="../../../assets/chevron-back-outline.svg">
       </button>
       </div>
-      <input type="text" (change)="handleSearchInputChange($event)" placeholder="Find new friends">
+      <input type="text"
+        (blur)="handleSearchInputBlur()"
+        (input)="handleSearchInputChange($event)"
+        placeholder="Find new friends..."
+      >
     </div>
-
     <div class="MaxB">
-      <app-friends [name]="name"></app-friends>
+      <section *ngFor="let user of usersFound">
+        <article>
+          <div>
+            <img src="../../../assets/person-outline.svg">
+          </div>
+          <p>{{ user.name }}</p>
+        </article>
+      </section>
     </div>
   </div>
-
-
 </body>
 </html>

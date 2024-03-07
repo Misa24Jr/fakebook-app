@@ -3,7 +3,6 @@
     align-items: center;
     justify-content: center;
     gap: 50px;
-    // background-color: #ede8eb;
     padding: 15px 20px;
     border-radius: 15px;
     width: 350px;
@@ -22,8 +21,11 @@
     height: 60px;
     overflow: hidden;
     padding: 15px;
-    border-radius: 25%;
     cursor: pointer;
     text-decoration: none;
   }
+  .tab:hover{
+    border-bottom: 3px solid #80616D;
+  }
+
   

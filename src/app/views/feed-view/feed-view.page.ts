@@ -19,7 +19,7 @@ import { GetResult, Preferences } from '@capacitor/preferences';
 })
 export class FeedViewPage implements OnInit {
   token: GetResult ;
-  description:string = 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ';
+  description:string = 'lorem ipsum dolor sit amet, consectetur adipiscing elit.. ';
   name: string = 'Isabella Fonseca';
   date: string = '27/08/2024';
 
@@ -44,7 +44,6 @@ export class FeedViewPage implements OnInit {
       const data = await response.json();
 
       if(data.length === 0){
-        //render a message like "It seems like your friends haven't posted anything yet."
         console.log('No posts');
       }
 

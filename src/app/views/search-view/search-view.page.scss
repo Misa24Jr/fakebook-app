@@ -38,7 +38,7 @@ input::placeholder{
 }
 section{
   width: 320px;
-  height: 95px;
+  height: 80px;
   background: #80616D;
   display: flex;
   justify-content: center;
@@ -64,16 +64,14 @@ img{
   padding: 10px;
 }
 p{
-  // background: blue;
   width: 100%;
 }
 .icono-content{
   position: absolute;
+  left: 15px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  // background-color: #80616D;
-  width: 90%;
 }
 .btn-icono{
   background: transparent;
@@ -82,3 +80,4 @@ p{
   width: 50px;
   height: 50px;
 }
+
